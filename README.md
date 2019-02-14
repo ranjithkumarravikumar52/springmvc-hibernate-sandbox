@@ -17,6 +17,11 @@
     * getCustomers()
     * updateCustomer()
     * deleteCustomer()
+* List customers
+    * POJO(Entity class Customer)
+    * CustomerDAO
+    * CustomerController
+    * list-customer.jsp
 
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
@@ -27,6 +32,7 @@
 * Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
 * [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
     * min servlet-api version should be 3
+* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 
 # Credits
 * Learned how to do these cool things from a [cool guy](https://www.udemy.com/user/chaddarby2/)
