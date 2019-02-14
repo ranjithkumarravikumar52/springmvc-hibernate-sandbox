@@ -4,7 +4,8 @@
         <title>$Title$</title>
     </head>
     <body>
-        <p>i come from spring dispatcher servlet</p>
-        <a href="/TestJDBCServlet">Test me</a>
+        <a href="/TestJDBCServlet">Test DB Connection</a><br>
+        <a href="/customer/list"> list customers</a>
+        <p>Last updated: ${currentTime}</p>
     </body>
 </html>
