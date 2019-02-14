@@ -1,4 +1,4 @@
-package sanitycheck;
+package customermodule.sanitycheck;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
