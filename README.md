@@ -27,7 +27,12 @@
         1. Define the service interface
         2. Define the service implementation
             * Inject the CustomerDAO
-
+* Add customer
+    * Update list-customer
+        * New "add customer" button
+    * Create HTML form for new customer
+    * Process Form data
+        * Controller<->Service<->DAO
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
