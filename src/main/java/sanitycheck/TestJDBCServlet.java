@@ -23,10 +23,7 @@ public class TestJDBCServlet extends javax.servlet.http.HttpServlet {
             Class.forName(driver);
             Connection myConnection = DriverManager.getConnection(jdbcUrl, user, pass);
             out.println("Connection successful");
-            myConnection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
