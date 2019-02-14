@@ -2,6 +2,22 @@
 * Customer Relationship Management (CRM)
 * CRUD operations on customer entity using spring MVC + Hibernate
 
+* In a web app, 
+    1. List customers
+    2. Add a new customer
+    3. Update a customer
+    4. Delete a customer
+* Process flow
+    * Customer Controller <-> Customer DAO (Responsible for interfacing with the database)
+    * Customer Controller <-> View
+    * We pass around model(data) from Customer DAO <-> Database
+* Customer DAO
+    * saveCustomer()
+    * getCustomer()
+    * getCustomers()
+    * updateCustomer()
+    * deleteCustomer()
+
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
