@@ -24,7 +24,7 @@
 
 
     <!--adding support for spring component scanning-->
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="customermodule"/>
 
     <!--adding support for conversion, formatting and validation support-->
     <mvc:annotation-driven/>
@@ -53,7 +53,7 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="myDataSource" />
-        <property name="packagesToScan" value="entity" />
+        <property name="packagesToScan" value="customermodule.entity" />
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
