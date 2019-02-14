@@ -32,6 +32,7 @@
 * Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
 * [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
     * min servlet-api version should be 3
+* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 
 # Credits
 * Learned how to do these cool things from a [cool guy](https://www.udemy.com/user/chaddarby2/)
