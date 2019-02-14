@@ -22,6 +22,11 @@
     * CustomerDAO
     * CustomerController
     * list-customer.jsp
+* Service layer design pattern
+    * using @Service annotation applied to service implementation
+        1. Define the service interface
+        2. Define the service implementation
+            * Inject the CustomerDAO
 
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
