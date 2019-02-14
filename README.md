@@ -17,6 +17,11 @@
     * getCustomers()
     * updateCustomer()
     * deleteCustomer()
+* List customers
+    * POJO(Entity class Customer)
+    * CustomerDAO
+    * CustomerController
+    * list-customer.jsp
 
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
