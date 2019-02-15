@@ -81,7 +81,10 @@
     * Copy/paste? not ideal
     1. Create a pointcut declarations
     2. Apply to multiple advices
-    * Share and combine pointcut declarations
+* Share and combine pointcut declarations
+    * logical operators AND, OR, NOT
+    * if(expr1() && expr2())
+
 
 # Spring configuration guide
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
