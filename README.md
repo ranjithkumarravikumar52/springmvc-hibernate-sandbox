@@ -116,7 +116,24 @@
     * runs regardless of sucess method completion but before returning value to calling method (Visualize in sequence diagram)
     * for an exception, @after will execute before @afterthrowing, however it doesnt have an access to exception
 ***
+* @Around
+    * runs before and after method execution
+    * combination of @Before and @After
+    * pre-processing and post-processing data
+    * Instrumentation/profiling code
+        * How long does it take for a section of code to run?
+    * Managing exceptions
+        * swallow/hold/throw
+        
+    * The handle to target method is done using ProceedingJoinPoint
+        * .proceed() to continue executing the main task
+***
+* Use java.util.logger.info(String s) instead sout to have everything printed to logger stream
+    * This is to avoid two different output streams
+    * spring uses logger and sout uses system
+***
 
+***
 
 
 # Spring configuration guide
