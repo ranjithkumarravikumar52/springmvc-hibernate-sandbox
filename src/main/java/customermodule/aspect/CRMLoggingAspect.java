@@ -45,11 +45,13 @@ public class CRMLoggingAspect {
         logger.info("====> in @Before: calling method: "+methodSignature);
 
         //display the arguments to the method
+        Object[] args = joinPoint.getArgs();
+        for(Object arg: args){
+            logger.info("====> arguments: "+arg.toString());
+        }
 
     }
 
-
-
-
     //add @After
+
 }
