@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 
     @Override
-    @Transactional
+//    @Transactional removed this after including service layer into our architecture
     public List<Customer> getCustomers() {
         // get the current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
@@ -31,7 +30,54 @@ public class CustomerDAOImpl implements CustomerDAO {
         // execute query and get result list
         List<Customer> customers = theQuery.getResultList();
 
+
+        //sorting by last name
+        /*customers.sort(new Comparator<Customer>() {
+            @Override
+            public int compare(Customer o1, Customer o2) {
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });*/
+        customers.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+
         // return the results
         return customers;
+    }
+
+    @Override
+    public void saveCustomer(Customer customer) {
+        //get current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        //save the customer to the DB OR update
+        currentSession.saveOrUpdate(customer);
+    }
+
+    @Override
+    public Customer getCustomer(int theId) {
+        //get current hibernate session
+        Session session = sessionFactory.getCurrentSession();
+
+        //get the customer
+        Customer customer = session.get(Customer.class, theId);
+
+        //return customer
+        return customer;
+    }
+
+    @Override
+    public void deleteCustomer(int theId) {
+        //get current session
+        Session session = sessionFactory.getCurrentSession();
+
+        //get the customer
+//        Customer customer = session.get(Customer.class, theId);
+//        //delete the customer
+//        session.remove(customer);
+        Query query = session.createQuery("delete from Customer where id =:customerId");
+        query.setParameter("customerId", theId);
+        query.executeUpdate();
+
+
     }
 }

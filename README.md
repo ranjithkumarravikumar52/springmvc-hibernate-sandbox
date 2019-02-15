@@ -22,7 +22,33 @@
     * CustomerDAO
     * CustomerController
     * list-customer.jsp
-
+* Service layer design pattern
+    * using @Service annotation applied to service implementation
+        1. Define the service interface
+        2. Define the service implementation
+            * Inject the CustomerDAO
+* Add customer
+    * Update list-customer
+        * New "add customer" button
+    * Create HTML form for new customer
+    * Process Form data
+        * Controller<->Service<->DAO
+    * sort the data displayed
+* Update customer
+    * update link to each customer
+        * using customer id
+    * Pre-populate the form to update the form
+        * using the id to fetch data from DB and populate the form
+    * Controller<->Customer Service<->Customer DAO
+    * Two ways to perform save
+        * save -> INSERT new record
+        * update -> UPDATE existing record
+        * saveOrUpdate if(primaryKey) empty then INSERT new customer else UPDATE existing customer
+* Delete customer
+    * Prompt me before delete (cos you never know)
+    * Each row has a delete link
+    * Get the updated ones back to our list
+    * Controller<->Customer Service<->Customer DAO (same as earlier)
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
