@@ -84,6 +84,15 @@
 * Share and combine pointcut declarations
     * logical operators AND, OR, NOT
     * if(expr1() && expr2())
+* Order of advices
+    * Unordered based on spring aop
+    * however it can refactored to be ordered using @Order annotation
+    * @Order(1), @Order(2) ... class level annotation (visualize it as boarding a flight, this will help a lot to understand)
+    * lower numbers have higher preference
+* Don't make your aspect class too fat
+* How do we read method arguments?
+    * Access(With JoinPoints) and display method signature (joinPoints.getMethodSignature())
+    * Access(With JoinPoints) and display method arguments (joinPoints.getMethodArguments())
 
 
 # Spring configuration guide
