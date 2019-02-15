@@ -10,7 +10,8 @@
         <!-- reference our style sheet -->
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
         <!-- reference our style sheet for save customer form -->
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css"/>
+        <link type="text/css" rel="stylesheet"
+              href="${pageContext.request.contextPath}/resources/css/add-customer-style.css"/>
     </head>
 
     <body>
@@ -26,6 +27,8 @@
             <form:form action="saveCustomer" modelAttribute="customer" method="POST">
                 <table>
                     <tbody>
+                            <%-- spring form load: call getters--%>
+                            <%-- form submit: call set--%>
                         <tr>
                             <td><label>First Name: </label></td>
                             <td><form:input path="firstName"/></td>
@@ -39,7 +42,7 @@
                             <td><form:input path="email"/></td>
                         </tr>
                         <tr>
-                            <td><input type = "submit" value = "Save" class="save"/></td>
+                            <td><input type="submit" value="Save" class="save"/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,7 +51,6 @@
             <p>
                 <a href="${pageContext.request.contextPath}/customer/list">Back to List</a>
             </p>
-
 
 
         </div>
