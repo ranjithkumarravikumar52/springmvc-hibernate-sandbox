@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
 
+import static customermodule.util.LoggerColor.*;
+
 @Aspect
 @Component
 public class CRMLoggingAspect {
@@ -65,7 +67,7 @@ public class CRMLoggingAspect {
         logger.info("====> in @AfterReturning: from method: " + methodSignature);
 
         //display data we are returning
-        logger.info("=====> result: " + result);
+        logger.info( "=====> result: " + result);
     }
 
 
