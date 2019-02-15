@@ -62,6 +62,7 @@
     * Done using Proxy design pattern
 * Difference between Spring AOP vs AspectJ? Start with Spring AOP and later move to AspectJ
 * Dependency? We need both Spring AOP and AspectJ
+    * Spring AOP is lightweight compared to AspectJ
 * Advice 
     * @Before
     * @AfterReturning
@@ -73,7 +74,16 @@
     2. Create Spring Java Config class
     3. Create main app and call the target bean method
     4. Create an Aspect with @Before advice
-# Spring configure
+* Be aware of absolute path names for pointcut expressions
+    * By return type, package, class name, method name, method parameters
+    *Spring AOP supports only public and * modifiers
+* Re-use pointcut expressions?
+    * Copy/paste? not ideal
+    1. Create a pointcut declarations
+    2. Apply to multiple advices
+    * Share and combine pointcut declarations
+
+# Spring configuration guide
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
 * Make sure the artifact is Web Application: Exploded
