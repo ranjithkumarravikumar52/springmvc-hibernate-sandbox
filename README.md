@@ -93,6 +93,27 @@
 * How do we read method arguments?
     * Access(With JoinPoints) and display method signature (joinPoints.getMethodSignature())
     * Access(With JoinPoints) and display method arguments (joinPoints.getMethodArguments())
+        * this gives an array of arguments, loop through them to display it or do any business logic on the type of arguments
+***
+* @AfterReturning:
+    * Runs after the successful method execution and no exception
+    * @AfterReturning(pointcut = "execution("")", returning = "result")
+        * To display the return value 
+    * Post processing
+        * Modify data of the return value before we send it to the calling method
+        * In other words, modified data is returned to the calling method
+        * However we must be careful in doing this
+***
+* @AfterThrowing
+    * runs after method if exception is thrown
+    * easier to understand the process flow when a sequence diagram can be visualized
+    * to access the execption
+        * @AfterThrowing(pointcut="execution()", throwing = "theException")
+        * Use JoinPoint to get any method values
+    * exception is read in this whole aspect area, it is actually thrown when its reaching the calling method
+    
+***
+
 
 
 # Spring configuration guide
