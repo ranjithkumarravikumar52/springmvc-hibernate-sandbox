@@ -56,6 +56,7 @@
 * Using AOP, our architecture will evolve into something like this
     * @Before -> View -> @Before -> Controller -> @Before -> Service -> @Before -> DAO
     * @After <- View <- @After <- Controller <- @After <- Service <- @After <- DAO
+* Create point cut declaration to match only the above layers (we dont include model for now)
 ***
 # AOP overview
 * AOP (using psvm() for now)
