@@ -33,6 +33,13 @@
     * Create HTML form for new customer
     * Process Form data
         * Controller<->Service<->DAO
+    * sort the data displayed
+* Update customer
+    * update link to each customer
+        * using customer id
+    * Pre-populate the form to update the form
+        * using the id to fetch data from DB and populate the form
+    * Controller<->Customer Service<->Customer DAO
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
