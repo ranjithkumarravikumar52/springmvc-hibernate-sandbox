@@ -50,6 +50,15 @@
     * Get the updated ones back to our list
     * Controller<->Customer Service<->Customer DAO (same as earlier)
 ***
+* Adding AOP
+* Till now we have our architecture something like this
+    * View <-> Controller <-> Service <-> DAO <-> DB
+* Using AOP, our architecture will evolve into something like this
+    * @Before -> View -> @Before -> Controller -> @Before -> Service -> @Before -> DAO
+    * @After <- View <- @After <- Controller <- @After <- Service <- @After <- DAO
+* Create point cut declaration to match only the above layers (we dont include model for now)
+***
+# AOP overview
 * AOP (using psvm() for now)
     * Code Tangling
     * Code scattering
@@ -131,8 +140,6 @@
 * Use java.util.logger.info(String s) instead sout to have everything printed to logger stream
     * This is to avoid two different output streams
     * spring uses logger and sout uses system
-***
-
 ***
 
 
