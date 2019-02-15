@@ -49,6 +49,30 @@
     * Each row has a delete link
     * Get the updated ones back to our list
     * Controller<->Customer Service<->Customer DAO (same as earlier)
+***
+* AOP (using psvm() for now)
+    * Code Tangling
+    * Code scattering
+    * possible solutions?
+        * Inheritance
+        * Delegation
+* Cross-cutting concerns
+* Updated process
+    * logging<->security<->controller<->logging<->security<->service<->logging<->security<->DAO<->DB
+    * Done using Proxy design pattern
+* Difference between Spring AOP vs AspectJ? Start with Spring AOP and later move to AspectJ
+* Dependency? We need both Spring AOP and AspectJ
+* Advice 
+    * @Before
+    * @AfterReturning
+        * Use cases: Logging, security, transactions(member @Transaction? I member!)
+        * Audit logging
+        * API management
+* Development process
+    1. Create target object: AccountDAO
+    2. Create Spring Java Config class
+    3. Create main app and call the target bean method
+    4. Create an Aspect with @Before advice
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
