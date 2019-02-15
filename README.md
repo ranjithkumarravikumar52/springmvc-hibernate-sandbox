@@ -62,6 +62,39 @@
     * @After <- View <- @After <- Controller <- @After <- Service <- @After <- DAO
 * Create point cut declaration to match only the above layers (we dont include model for now)
 ***
+## Spring security
+### Overview
+* Secure spring MVC web apps
+* Develop login pages(default and custom)
+* Define users and roles with simple authentication
+* Protect URLS based on role
+* Use JSP tags to hide/show content based on role
+* Store users, passwords and roles in DB(plaintext -> encrypted)
+* Two ways
+    1. Declarative (java config/xml config)
+    2. Programmatic (API for custom application coding)
+* Authentication
+    * Check user id and password with credential stored in our app
+* Authorization
+    * Check to see if user has an authorized role
+* Different login methods
+    * HTTP Basic authentication
+        * Web browser will pop up default ugly one
+    * Default login form (from Spring Security)
+        * Based on HTML form (good for quick start)
+    * Custom login form
+        * Use your magic on this (full control)
+* Authentication and Authorization
+    * in-memory
+    * jdbc
+* In our app, we use no-xml for our configuration
+    
+## Migrate to java-config
+* Create a class for Spring App Configuration
+    * Define a bean for view resolver here
+* Create spring dispatcher servlet initializer
+
+***
 ## AOP overview
 * AOP (using psvm() for now)
     * Code Tangling
