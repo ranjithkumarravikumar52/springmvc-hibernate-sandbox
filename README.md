@@ -111,7 +111,10 @@
         * @AfterThrowing(pointcut="execution()", throwing = "theException")
         * Use JoinPoint to get any method values
     * exception is read in this whole aspect area, it is actually thrown when its reaching the calling method
-    
+***
+* @After
+    * runs regardless of sucess method completion but before returning value to calling method (Visualize in sequence diagram)
+    * for an exception, @after will execute before @afterthrowing, however it doesnt have an access to exception
 ***
 
 
