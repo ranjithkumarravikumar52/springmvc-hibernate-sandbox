@@ -40,6 +40,10 @@
     * Pre-populate the form to update the form
         * using the id to fetch data from DB and populate the form
     * Controller<->Customer Service<->Customer DAO
+    * Two ways to perform save
+        * save -> INSERT new record
+        * update -> UPDATE existing record
+        * saveOrUpdate if(primaryKey) empty then INSERT new customer else UPDATE existing customer
 # Spring configure
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
