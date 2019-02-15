@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -31,7 +33,26 @@ public class CustomerDAOImpl implements CustomerDAO {
         // execute query and get result list
         List<Customer> customers = theQuery.getResultList();
 
+
+        //sorting by last name
+        /*customers.sort(new Comparator<Customer>() {
+            @Override
+            public int compare(Customer o1, Customer o2) {
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });*/
+        customers.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
+
         // return the results
         return customers;
+    }
+
+    @Override
+    public void saveCustomer(Customer customer) {
+        //get current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        //save the customer to the DB
+        currentSession.save(customer);
     }
 }
