@@ -94,6 +94,8 @@
     * Common pitfall is using incompatible projects
     * Need to find compatible version
         * Look at the POM version in maven repo
+* To enable spring security, we need two classes
+    1. AbstractWebApplicationInitializer
     
 ## Migrate to java-config
 * In our app, we use no-xml for our configuration

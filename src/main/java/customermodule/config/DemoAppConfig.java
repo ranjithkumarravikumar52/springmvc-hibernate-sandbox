@@ -10,6 +10,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,10 +28,11 @@ import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
+@EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan("customermodule")
 @PropertySource({"classpath:persistence-mysql.properties"})
-public class DemoAppConfig implements WebMvcConfigurer {
+public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
     private Environment environment;
@@ -131,4 +136,16 @@ public class DemoAppConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/");
     }
 
+    /**
+     * For authentication
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //add our users for in memory authentication
+        User.UserBuilder user = User.withDefaultPasswordEncoder();
+        auth.inMemoryAuthentication()
+                .withUser(user.username("john").password("abc").roles("EMPLOYEE"))
+                .withUser(user.username("mary").password("abc").roles("MANAGER"))
+                .withUser(user.username("susan").password("abc").roles("ADMIN"));
+    }
 }
