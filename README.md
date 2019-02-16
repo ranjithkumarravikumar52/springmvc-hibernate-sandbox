@@ -87,9 +87,16 @@
 * Authentication and Authorization
     * in-memory
     * jdbc
-* In our app, we use no-xml for our configuration
+* Spring Security Dependencies
+    * spring-security-web
+    * spring-security-config
+* Spring security and Spring Framework operate on different release cycles (not in sync)
+    * Common pitfall is using incompatible projects
+    * Need to find compatible version
+        * Look at the POM version in maven repo
     
 ## Migrate to java-config
+* In our app, we use no-xml for our configuration
 * Create a class for Spring App Configuration
     * Define a bean for view resolver here
 * Create spring dispatcher servlet initializer
