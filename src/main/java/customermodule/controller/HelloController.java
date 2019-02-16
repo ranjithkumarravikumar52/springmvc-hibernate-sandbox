@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
+@RequestMapping("")
 public class HelloController {
     @GetMapping("/")
     public String showHome(Model model) {
