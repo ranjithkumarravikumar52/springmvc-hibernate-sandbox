@@ -96,6 +96,18 @@
         * Look at the POM version in maven repo
 * To enable spring security, we need two classes
     1. AbstractWebApplicationInitializer
+    2. WebSecurityConfigurerAdapter extended in our Java Config class with @EnableWebSecurity
+* Spring security filters handles any incoming request to check for
+    1. is resource protected?
+    2. is the request authenticated?
+    3. is the request authorized to access any/specific resource?
+    4. navigate it to login form
+* In-memory authentication
+* Custom-login form (more control than the default one)
+    * Development process
+        1. Modify spring security configuration to reference custom login form
+        2. Develop a controller to show the custom login form
+        3. Create custom login form
     
 ## Migrate to java-config
 * In our app, we use no-xml for our configuration
