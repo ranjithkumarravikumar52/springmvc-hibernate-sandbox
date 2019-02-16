@@ -6,6 +6,8 @@
     <body>
         <a href="/TestJDBCServlet">Test DB Connection</a><br>
         <a href="/customer/list"> list customers</a>
+        <a href="/resources/css/add-customer-style.css">add-customer-style.css</a>
+        <a href="/resources/css/style.css">style.css</a>
         <p>Last updated: ${currentTime}</p>
     </body>
 </html>

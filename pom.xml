@@ -10,13 +10,14 @@
     <packaging>war</packaging>
 
     <name>spring-mvc-hibernate-demo</name>
-    <!-- FIXME change it to the project's website -->
     <url>https://github.com/ranjithkumarravikumar52/springmvc-hibernate-sandbox</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <springframework-version>5.0.12.RELEASE</springframework-version>
+        <mysql-connector-java-version>8.0.11</mysql-connector-java-version>
     </properties>
 
     <dependencies>
@@ -32,7 +33,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.0.12.RELEASE</version>
+            <version>${springframework-version}</version>
         </dependency>
 
         <!-- used for servlet -->
@@ -57,12 +58,11 @@
         </dependency>
 
 
-
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
+            <version>${mysql-connector-java-version}</version>
         </dependency>
 
 
@@ -96,15 +96,12 @@
 
 
         <!-- Spice up your java: Automatic Resource Management, automatic generation of getters, setters, equals, hashCode and toString, and more! -->
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
             <scope>provided</scope>
         </dependency>
-
-
 
 
         <!-- ADD Spring AOP Dependency -->

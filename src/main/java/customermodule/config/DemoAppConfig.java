@@ -1,11 +1,6 @@
 package customermodule.config;
 
-import java.beans.PropertyVetoException;
-import java.util.Properties;
-import java.util.logging.Logger;
-
-import javax.sql.DataSource;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,23 +17,26 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+import java.util.Properties;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("customermodule")
-@PropertySource({ "classpath:persistence-mysql.properties" })
+@PropertySource({"classpath:persistence-mysql.properties"})
 public class DemoAppConfig implements WebMvcConfigurer {
 
     @Autowired
-    private Environment env;
+    private Environment environment;
 
     private Logger logger = Logger.getLogger(getClass().getName());
 
     // define a bean for ViewResolver
     @Bean
-    public ViewResolver viewResolver(){
+    public ViewResolver viewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/WEB-INF/view/");
         internalResourceViewResolver.setSuffix(".jsp");
@@ -54,19 +52,18 @@ public class DemoAppConfig implements WebMvcConfigurer {
         // set the jdbc driver
         try {
             myDataSource.setDriverClass("com.mysql.jdbc.Driver");
-        }
-        catch (PropertyVetoException exc) {
+        } catch (PropertyVetoException exc) {
             throw new RuntimeException(exc);
         }
 
         // for sanity's sake, let's log url and user ... just to make sure we are reading the data
-        logger.info("jdbc.url=" + env.getProperty("jdbc.url"));
-        logger.info("jdbc.user=" + env.getProperty("jdbc.user"));
+        logger.info("jdbc.url=" + environment.getProperty("jdbc.url"));
+        logger.info("jdbc.user=" + environment.getProperty("jdbc.user"));
 
         // set database connection props
-        myDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
-        myDataSource.setUser(env.getProperty("jdbc.user"));
-        myDataSource.setPassword(env.getProperty("jdbc.password"));
+        myDataSource.setJdbcUrl(environment.getProperty("jdbc.url"));
+        myDataSource.setUser(environment.getProperty("jdbc.user"));
+        myDataSource.setPassword(environment.getProperty("jdbc.password"));
 
         // set connection pool props
         myDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
@@ -82,19 +79,16 @@ public class DemoAppConfig implements WebMvcConfigurer {
         // set hibernate properties
         Properties props = new Properties();
 
-        props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        props.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+        props.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
 
         return props;
     }
 
-
-    // need a helper method
-    // read environment property and convert to int
-
+    // need a helper method, read environment property and convert to int
     private int getIntProperty(String propName) {
 
-        String propVal = env.getProperty(propName);
+        String propVal = environment.getProperty(propName);
 
         // now convert to int
         int intPropVal = Integer.parseInt(propVal);
@@ -103,14 +97,14 @@ public class DemoAppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(){
+    public LocalSessionFactoryBean sessionFactory() {
 
         // create session factorys
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 
         // set the properties
         sessionFactory.setDataSource(myDataSource());
-        sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
+        sessionFactory.setPackagesToScan(environment.getProperty("hibernate.packagesToScan"));
         sessionFactory.setHibernateProperties(getHibernateProperties());
 
         return sessionFactory;
@@ -125,6 +119,16 @@ public class DemoAppConfig implements WebMvcConfigurer {
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
+    }
+
+    /**
+     * Loading resources
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 
 }
