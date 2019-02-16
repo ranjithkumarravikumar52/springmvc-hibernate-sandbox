@@ -62,6 +62,48 @@
     * @After <- View <- @After <- Controller <- @After <- Service <- @After <- DAO
 * Create point cut declaration to match only the above layers (we dont include model for now)
 ***
+## Spring security
+### Overview
+* Secure spring MVC web apps
+* Develop login pages(default and custom)
+* Define users and roles with simple authentication
+* Protect URLS based on role
+* Use JSP tags to hide/show content based on role
+* Store users, passwords and roles in DB(plaintext -> encrypted)
+* Two ways
+    1. Declarative (java config/xml config)
+    2. Programmatic (API for custom application coding)
+* Authentication
+    * Check user id and password with credential stored in our app
+* Authorization
+    * Check to see if user has an authorized role
+* Different login methods
+    * HTTP Basic authentication
+        * Web browser will pop up default ugly one
+    * Default login form (from Spring Security)
+        * Based on HTML form (good for quick start)
+    * Custom login form
+        * Use your magic on this (full control)
+* Authentication and Authorization
+    * in-memory
+    * jdbc
+* Spring Security Dependencies
+    * spring-security-web
+    * spring-security-config
+* Spring security and Spring Framework operate on different release cycles (not in sync)
+    * Common pitfall is using incompatible projects
+    * Need to find compatible version
+        * Look at the POM version in maven repo
+* To enable spring security, we need two classes
+    1. AbstractWebApplicationInitializer
+    
+## Migrate to java-config
+* In our app, we use no-xml for our configuration
+* Create a class for Spring App Configuration
+    * Define a bean for view resolver here
+* Create spring dispatcher servlet initializer
+
+***
 ## AOP overview
 * AOP (using psvm() for now)
     * Code Tangling
@@ -157,6 +199,7 @@
     * min servlet-api version should be 3
 * [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 * How to enable coloring to our logs? Or how is filtering done to log files?
+* [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
 
 ## Credits
 * Learned how to do these cool things from a [cool guy](https://www.udemy.com/user/chaddarby2/)
