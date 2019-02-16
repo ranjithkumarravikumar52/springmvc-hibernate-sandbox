@@ -197,6 +197,7 @@
     * min servlet-api version should be 3
 * [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 * How to enable coloring to our logs? Or how is filtering done to log files?
+* [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
 
 ## Credits
 * Learned how to do these cool things from a [cool guy](https://www.udemy.com/user/chaddarby2/)
