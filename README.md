@@ -108,7 +108,33 @@
         1. Modify spring security configuration to reference custom login form
         2. Develop a controller to show the custom login form
         3. Create custom login form
+***
+### Authentication (Login + Logout)
+* Use @EnableWebSecurity in our spring config java class
+* Authentication functionality is provided by the controller /authenticateTheUser
+* Override configure(AuthenticationManagerBuilder auth) for in-memory authentication
+* Override configure(HttpSecurity httpSecurity) for custom login page + authentication
+    * Include logout functionality in the above method and pass it /logout controller (default given by spring security)
+
+***
     
+## Spring configuration guide
+* [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
+* The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
+* Make sure the artifact is Web Application: Exploded
+
+## Issues
+* Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
+* [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
+    * min servlet-api version should be 3
+* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
+* How to enable coloring to our logs? Or how is filtering done to log files?
+* [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
+* [How to use webjars in our project](https://www.baeldung.com/maven-webjars)
+* [Weird comment indentation in intellij](https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes)
+
+***
+
 ## Migrate to java-config
 * In our app, we use no-xml for our configuration
 * Create a class for Spring App Configuration
@@ -199,20 +225,5 @@
     * spring uses logger and sout uses system
 ***
 
-
-## Spring configuration guide
-* [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
-* The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
-* Make sure the artifact is Web Application: Exploded
-
-## Issues
-* Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
-* [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
-    * min servlet-api version should be 3
-* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
-* How to enable coloring to our logs? Or how is filtering done to log files?
-* [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
-* [How to use webjars in our project](https://www.baeldung.com/maven-webjars)
-* [Weird comment indentation in intellij](https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes)
 ## Credits
 * Learned how to do these cool things from a [cool guy](https://www.udemy.com/user/chaddarby2/)
