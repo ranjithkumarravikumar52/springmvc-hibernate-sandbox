@@ -163,6 +163,8 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
                 .formLogin()
                     .loginPage("/showMyLoginPage")
                     .loginProcessingUrl("/authenticateTheUser")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .logout().permitAll();
     }
 }
