@@ -11,9 +11,19 @@
 <html>
     <head>
         <title>Custom Login Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Reference Bootstrap files -->
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h3>Custom login form, login with your username and password</h3>
+
         <%-- we send it authenticateTheUser which spring gives us for performing authenitcation logic--%>
         <%-- use spring MVC form tag to provide some embedded security--%>
         <%--request type should be POST --%>
@@ -25,7 +35,7 @@
                 <div class="panel panel-info">
 
                     <div class="panel-heading">
-                        <div class="panel-title">Sign In</div>
+                        <div class="panel-title">Custom login form, login with your username and password</div>
                     </div>
 
                     <div style="padding-top: 30px" class="panel-body">
@@ -83,8 +93,8 @@
                         </form:form>
 
 
-                    </div><%--panel body--%>
-s
+                    </div>
+                    <%--panel body--%>
                 </div>
 
             </div>

@@ -20,9 +20,6 @@
         <springframework-version>5.1.5.RELEASE</springframework-version>
         <springsecurity-version>5.1.4.RELEASE</springsecurity-version>
 
-        <bootstrap-version>4.0.0</bootstrap-version>
-        <jquery-version>3.2.1</jquery-version>
-
     </properties>
 
     <dependencies>
@@ -140,20 +137,6 @@
             <artifactId>lombok</artifactId>
             <version>1.16.22</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>${bootstrap-version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>${jquery-version}</version>
         </dependency>
 
 
