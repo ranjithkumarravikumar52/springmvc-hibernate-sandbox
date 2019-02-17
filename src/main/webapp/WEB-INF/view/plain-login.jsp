@@ -11,6 +11,11 @@
 <html>
     <head>
         <title>Custom Login Page</title>
+        <style>
+            .failed{
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <h3>Custom login form, login with your username and password</h3>
@@ -19,7 +24,7 @@
         <%--request type should be POST --%>
         <form:form action="${pageContext.request.contextPath}/authenticateTheUser" method = "POST">
             <c:if test="${param.error != null}">
-                <i>Sorry! You entered invalid credentials</i>
+                <i class="failed">Sorry! You entered invalid credentials</i>
             </c:if><br>
             User <input type="text" name = "username"><br>
             Password <input type="password" name = "password"><br>

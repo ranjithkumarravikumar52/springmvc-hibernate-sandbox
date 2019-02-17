@@ -138,6 +138,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
