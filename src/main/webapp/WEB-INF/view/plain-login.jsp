@@ -18,7 +18,7 @@
         <%--request type should be POST --%>
         <form:form action="${pageContext.request.contextPath}/authenticateTheUser" method = "POST">
             User <input type="text" name = "username"><br>
-            User <input type="password" name = "password"><br>
+            Password <input type="password" name = "password"><br>
             <input type="submit" value = "Login" /><br>
         </form:form>
     </body>
