@@ -11,6 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -137,7 +138,7 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
     }
 
     /**
-     * For authentication
+     * For authentication in-memory
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -147,5 +148,23 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
                 .withUser(user.username("john").password("abc").roles("EMPLOYEE"))
                 .withUser(user.username("mary").password("abc").roles("MANAGER"))
                 .withUser(user.username("susan").password("abc").roles("ADMIN"));
+    }
+
+    /**
+     * /showMyLoginPage will send login details to /authenticateTheUser(given by spring by default) controller
+     * @param httpSecurity allows us to restrict access based on the HttpServletRequest
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                    .loginPage("/showMyLoginPage")
+                    .loginProcessingUrl("/authenticateTheUser")
+                    .permitAll()
+                .and()
+                    .logout().permitAll();
     }
 }
