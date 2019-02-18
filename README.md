@@ -137,6 +137,14 @@
     * return a jsp from the above controller
 
 ***
+### Restricting content based on roles
+* Till now we are able to lock down resources based on roles on URLS
+* But how about content though? 
+* Done using spring security JSP tags
+* enclose our content in `<security:authorize access="hasRole('MANAGER')`
+* even `view page source` will be able to display the content
+
+***
 ## Spring configuration guide
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
