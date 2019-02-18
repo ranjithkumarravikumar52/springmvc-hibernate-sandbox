@@ -143,6 +143,20 @@
 * Done using spring security JSP tags
 * enclose our content in `<security:authorize access="hasRole('MANAGER')`
 * even `view page source` will be able to display the content
+***
+### Spring Security JDBC - Overview
+* Till now we authorized users based on in-memory authentication
+* However, spring provides a default database scheme config that we can use to set up authentication and authorization roles
+
+### Spring security password storage 
+* Stores password in a specific format `{id}encodedPassword`
+
+| ID        | Description           | 
+| ------------- |:-------------:|
+| noop       | Plain text passwords | 
+| bcrypt       | BCrypt password hashing | 
+ 
+
 
 ***
 ## Spring configuration guide
