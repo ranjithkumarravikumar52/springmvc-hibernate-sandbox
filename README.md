@@ -156,7 +156,9 @@
 | noop       | Plain text passwords | 
 | bcrypt       | BCrypt password hashing | 
  
-
+### How to encrypt password
+* `{bcrypt}dadadkldnaksnkdcnalknasalfknaslfojqiwy98qwy9512yr9rhwklmfks`
+* use either some website that generates a password or our own java code
 
 ***
 ## Spring configuration guide
