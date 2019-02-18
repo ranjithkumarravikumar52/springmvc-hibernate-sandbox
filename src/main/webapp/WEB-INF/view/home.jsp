@@ -24,6 +24,11 @@
 			<a href="${pageContext.request.contextPath}/leaders">Leadership meeting</a>(Only for managers folks)
 		</p>
 		<br>
+		<%--add a link to point to /systems...this is for the managers--%>
+		<p>
+			<a href="${pageContext.request.contextPath}/systems">Admins meeting</a>(About Mongo-DB design)
+		</p>
+		<br>
 		<%-- adding a logout button --%>
 		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 			<input type="submit" value="Logout"/>

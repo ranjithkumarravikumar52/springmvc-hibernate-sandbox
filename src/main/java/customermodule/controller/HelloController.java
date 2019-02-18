@@ -26,4 +26,9 @@ public class HelloController {
     public String showLeaders() {
         return "leaders";
     }
+    //add request mapping for /systems
+    @GetMapping("/systems")
+    public String showAdmins() {
+        return "admins";
+    }
 }
