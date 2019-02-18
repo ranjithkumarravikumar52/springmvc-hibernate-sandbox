@@ -168,11 +168,12 @@
 * Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
 * [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
     * min servlet-api version should be 3
-* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
+* [Resources or is it lib? :P](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 * How to enable coloring to our logs? Or how is filtering done to log files?
 * [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
 * [How to use webjars in our project](https://www.baeldung.com/maven-webjars)
 * [Weird comment indentation in intellij](https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes)
+* [Resource folder stays in src/main and the other resources in webapp should be named to lib](https://stackoverflow.com/questions/31051494/how-to-link-a-web-resource-file-from-main-resources-in-jsp)
 
 ***
 
