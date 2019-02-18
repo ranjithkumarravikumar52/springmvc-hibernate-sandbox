@@ -122,6 +122,14 @@
 * Download spring security taglibs
 * use spring:authentication principal.username for name
 * use spring:authentication principal.authorities for roles
+***
+### Restricting resources based on roles
+* role: EMPLOYEE, MANAGER, ADMIN
+* how to restrict resources based on above roles? 
+* update java security config file
+    * `antMatchers(<<add path to match on>>).hasRole(<<authorized role>>)`
+    * `antMatchers(<<"/systems/**">>).hasRole(<<ADMIN>>)`
+    * `antMatchers(<<"/systems/**">>).hasAnyRole(<<EMPLOYEE, ADMIN>>)` (multi-roles)
 
 ***
 ## Spring configuration guide

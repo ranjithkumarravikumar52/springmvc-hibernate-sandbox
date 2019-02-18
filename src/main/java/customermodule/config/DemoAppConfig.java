@@ -146,8 +146,8 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 		User.UserBuilder user = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication()
 				.withUser(user.username("john").password("abc").roles("EMPLOYEE"))
-				.withUser(user.username("mary").password("abc").roles("MANAGER"))
-				.withUser(user.username("susan").password("abc").roles("ADMIN"));
+				.withUser(user.username("mary").password("abc").roles("EMPLOYEE", "MANAGER"))
+				.withUser(user.username("susan").password("abc").roles("EMPLOYEE", "ADMIN"));
 	}
 
 	/**
