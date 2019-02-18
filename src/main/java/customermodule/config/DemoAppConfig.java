@@ -136,9 +136,9 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 		/*//add our users for in memory authentication
 		User.UserBuilder user = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication()
-				.withUser(user.username("john").password("abc").roles("EMPLOYEE"))
-				.withUser(user.username("mary").password("abc").roles("EMPLOYEE", "MANAGER"))
-				.withUser(user.username("susan").password("abc").roles("EMPLOYEE", "ADMIN"));*/
+				.withUser(user.username("john").password("fun123").roles("EMPLOYEE"))
+				.withUser(user.username("mary").password("fun123").roles("EMPLOYEE", "MANAGER"))
+				.withUser(user.username("susan").password("fun123").roles("EMPLOYEE", "ADMIN"));*/
 
 		//using jdbc authentication instead of in-memory authentication
 		auth.jdbcAuthentication().dataSource(myDataSource);
