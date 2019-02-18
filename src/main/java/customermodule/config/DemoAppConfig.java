@@ -169,8 +169,8 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 				.loginProcessingUrl("/authenticateTheUser")
 				.permitAll()
 				.and()
-				.logout().permitAll();
-
-
+				.logout().permitAll()
+				.and()//below code is for access-denied controller for our app
+				.exceptionHandling().accessDeniedPage("/access-denied");
 	}
 }

@@ -130,6 +130,11 @@
     * `antMatchers(<<add path to match on>>).hasRole(<<authorized role>>)`
     * `antMatchers(<<"/systems/**">>).hasRole(<<ADMIN>>)`
     * `antMatchers(<<"/systems/**">>).hasAnyRole(<<EMPLOYEE, ADMIN>>)` (multi-roles)
+    * accessing restricted page will throw 403 error
+* how to customize our own custom page for access-denied page
+    * `.exceptionHandling().accessDeniedPage("/access-denied")"` use this request mapping path only for 403
+    * create the controller /access-denied
+    * return a jsp from the above controller
 
 ***
 ## Spring configuration guide
