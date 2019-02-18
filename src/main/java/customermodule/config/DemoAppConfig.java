@@ -32,139 +32,139 @@ import java.util.logging.Logger;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan("customermodule")
-@PropertySource({"classpath:persistence-mysql.properties"})
+@PropertySource({"classpath:persistence-mysql.properties"}) // will read the props file during maven build, copied to classpath
 public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-    @Autowired
-    private Environment environment;
+	@Autowired
+	private Environment environment; // will hold data read from properties file
 
-    private Logger logger = Logger.getLogger(getClass().getName());
+	@Autowired
+	private DataSource myDataSource;
 
-    // define a bean for ViewResolver
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-        internalResourceViewResolver.setPrefix("/WEB-INF/view/");
-        internalResourceViewResolver.setSuffix(".jsp");
-        return internalResourceViewResolver;
-    }
+	private Logger logger = Logger.getLogger(getClass().getName());
 
-    @Bean
-    public DataSource myDataSource() {
+	// define a bean for ViewResolver
+	@Bean
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+		internalResourceViewResolver.setPrefix("/WEB-INF/view/");
+		internalResourceViewResolver.setSuffix(".jsp");
+		return internalResourceViewResolver;
+	}
 
-        // create connection pool
-        ComboPooledDataSource myDataSource = new ComboPooledDataSource();
+	@Bean
+	public DataSource myDataSource() {
 
-        // set the jdbc driver
-        try {
-            myDataSource.setDriverClass("com.mysql.jdbc.Driver");
-        } catch (PropertyVetoException exc) {
-            throw new RuntimeException(exc);
-        }
+		// create connection pool from c3p0 framework
+		ComboPooledDataSource myDataSource = new ComboPooledDataSource();
 
-        // for sanity's sake, let's log url and user ... just to make sure we are reading the data
-        logger.info("jdbc.url=" + environment.getProperty("jdbc.url"));
-        logger.info("jdbc.user=" + environment.getProperty("jdbc.user"));
+		// set the jdbc driver
+		try {
+			myDataSource.setDriverClass(environment.getProperty("jdbc.driver"));
+		} catch (PropertyVetoException exc) {
+			throw new RuntimeException(exc);
+		}
 
-        // set database connection props
-        myDataSource.setJdbcUrl(environment.getProperty("jdbc.url"));
-        myDataSource.setUser(environment.getProperty("jdbc.user"));
-        myDataSource.setPassword(environment.getProperty("jdbc.password"));
+		// for sanity's sake, let's log url and user ... just to make sure we are reading the data
+		logger.info(">>>>> jdbc.url = " + environment.getProperty("jdbc.url"));
+		logger.info(">>>>> jdbc.user = " + environment.getProperty("jdbc.user"));
 
-        // set connection pool props
-        myDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
-        myDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
-        myDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
-        myDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
+		// set database connection props
+		myDataSource.setJdbcUrl(environment.getProperty("jdbc.url"));
+		myDataSource.setUser(environment.getProperty("jdbc.user"));
+		myDataSource.setPassword(environment.getProperty("jdbc.password"));
 
-        return myDataSource;
-    }
+		// set connection pool props
+		myDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
+		myDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
+		myDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
+		myDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
 
-    private Properties getHibernateProperties() {
+		return myDataSource;
+	}
 
-        // set hibernate properties
-        Properties props = new Properties();
+	// set hibernate properties
+	private Properties getHibernateProperties() {
+		Properties props = new Properties();
+		props.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+		props.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+		return props;
+	}
 
-        props.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
-        props.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+	// need a helper method, read environment property and convert to int
+	private int getIntProperty(String propName) {
+		String propVal = environment.getProperty(propName);
+		int intPropVal = Integer.parseInt(propVal);// now convert to int
+		return intPropVal;
+	}
 
-        return props;
-    }
+	// create session factory
+	@Bean
+	public LocalSessionFactoryBean sessionFactory() {
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		// set the properties
+		sessionFactory.setDataSource(myDataSource());
+		sessionFactory.setPackagesToScan(environment.getProperty("hibernate.packagesToScan"));
+		sessionFactory.setHibernateProperties(getHibernateProperties());
+		return sessionFactory;
+	}
 
-    // need a helper method, read environment property and convert to int
-    private int getIntProperty(String propName) {
+	@Bean
+	@Autowired
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+		// setup transaction manager based on session factory
+		HibernateTransactionManager txManager = new HibernateTransactionManager();
+		txManager.setSessionFactory(sessionFactory);
+		return txManager;
+	}
 
-        String propVal = environment.getProperty(propName);
+	/**
+	 * Loading resources
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry
+				.addResourceHandler("/lib/**")
+				.addResourceLocations("/lib/");
+	}
 
-        // now convert to int
-        int intPropVal = Integer.parseInt(propVal);
+	/**
+	 * For authentication in-memory
+	 */
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		/*//add our users for in memory authentication
+		User.UserBuilder user = User.withDefaultPasswordEncoder();
+		auth.inMemoryAuthentication()
+				.withUser(user.username("john").password("fun123").roles("EMPLOYEE"))
+				.withUser(user.username("mary").password("fun123").roles("EMPLOYEE", "MANAGER"))
+				.withUser(user.username("susan").password("fun123").roles("EMPLOYEE", "ADMIN"));*/
 
-        return intPropVal;
-    }
+		//using jdbc authentication instead of in-memory authentication
+		auth.jdbcAuthentication().dataSource(myDataSource);
+	}
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-
-        // create session factorys
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-
-        // set the properties
-        sessionFactory.setDataSource(myDataSource());
-        sessionFactory.setPackagesToScan(environment.getProperty("hibernate.packagesToScan"));
-        sessionFactory.setHibernateProperties(getHibernateProperties());
-
-        return sessionFactory;
-    }
-
-    @Bean
-    @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-
-        // setup transaction manager based on session factory
-        HibernateTransactionManager txManager = new HibernateTransactionManager();
-        txManager.setSessionFactory(sessionFactory);
-
-        return txManager;
-    }
-
-    /**
-     * Loading resources
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }
-
-    /**
-     * For authentication in-memory
-     */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //add our users for in memory authentication
-        User.UserBuilder user = User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser(user.username("john").password("abc").roles("EMPLOYEE"))
-                .withUser(user.username("mary").password("abc").roles("MANAGER"))
-                .withUser(user.username("susan").password("abc").roles("ADMIN"));
-    }
-
-    /**
-     * /showMyLoginPage will send login details to /authenticateTheUser(given by spring by default) controller
-     * @param httpSecurity allows us to restrict access based on the HttpServletRequest
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                    .loginPage("/showMyLoginPage")
-                    .loginProcessingUrl("/authenticateTheUser")
-                    .permitAll()
-                .and()
-                    .logout().permitAll();
-    }
+	/**
+	 * /showMyLoginPage will send login details to /authenticateTheUser(given by spring by default) controller
+	 *
+	 * @param httpSecurity allows us to restrict access based on the HttpServletRequest
+	 * @throws Exception
+	 */
+	@Override
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.authorizeRequests()
+				// .anyRequest().authenticated()
+				.antMatchers("/").hasRole("EMPLOYEE") //any employee can access the home page -> our whole app is restricted now to only employees
+				.antMatchers("/leaders/**").hasRole("MANAGER") //any employee can access the home page
+				.antMatchers("/systems/**").hasRole("ADMIN") //any employee can access the home page
+				.and()
+				.formLogin()
+				.loginPage("/showMyLoginPage")
+				.loginProcessingUrl("/authenticateTheUser")
+				.permitAll()
+				.and()
+				.logout().permitAll()
+				.and()//below code is for access-denied controller for our app
+				.exceptionHandling().accessDeniedPage("/access-denied");
+	}
 }

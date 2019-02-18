@@ -117,7 +117,50 @@
     * Include logout functionality in the above method and pass it /logout controller (default given by spring security)
 
 ***
-    
+### UserID and roles
+* How to display user id and roles?
+* Download spring security taglibs
+* use spring:authentication principal.username for name
+* use spring:authentication principal.authorities for roles
+***
+### Restricting resources based on roles
+* role: EMPLOYEE, MANAGER, ADMIN
+* how to restrict resources based on above roles? 
+* update java security config file
+    * `antMatchers(<<add path to match on>>).hasRole(<<authorized role>>)`
+    * `antMatchers(<<"/systems/**">>).hasRole(<<ADMIN>>)`
+    * `antMatchers(<<"/systems/**">>).hasAnyRole(<<EMPLOYEE, ADMIN>>)` (multi-roles)
+    * accessing restricted page will throw 403 error
+* how to customize our own custom page for access-denied page
+    * `.exceptionHandling().accessDeniedPage("/access-denied")"` use this request mapping path only for 403
+    * create the controller /access-denied
+    * return a jsp from the above controller
+
+***
+### Restricting content based on roles
+* Till now we are able to lock down resources based on roles on URLS
+* But how about content though? 
+* Done using spring security JSP tags
+* enclose our content in `<security:authorize access="hasRole('MANAGER')`
+* even `view page source` will be able to display the content
+***
+### Spring Security JDBC - Overview
+* Till now we authorized users based on in-memory authentication
+* However, spring provides a default database scheme config that we can use to set up authentication and authorization roles
+
+### Spring security password storage 
+* Stores password in a specific format `{id}encodedPassword`
+
+| ID        | Description           | 
+| ------------- |:-------------:|
+| noop       | Plain text passwords | 
+| bcrypt       | BCrypt password hashing | 
+ 
+### How to encrypt password
+* `{bcrypt}dadadkldnaksnkdcnalknasalfknaslfojqiwy98qwy9512yr9rhwklmfks`
+* use either some website that generates a password or our own java code
+
+***
 ## Spring configuration guide
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
@@ -127,11 +170,12 @@
 * Best way to setup my maven architecture is to use the default structure and manually restructure the project folders
 * [@Web annotation couldn't resolve](https://stackoverflow.com/questions/26089902/webservlet-annotation-doesnt-work-with-tomcat-8)
     * min servlet-api version should be 3
-* [Resources](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
+* [Resources or is it lib? :P](https://stackoverflow.com/questions/19748980/spring-mvc-css-and-javascript-is-not-working-properly) folder stays in webapp folder not in java folder
 * How to enable coloring to our logs? Or how is filtering done to log files?
 * [How to load static resources into java spring config](https://www.baeldung.com/spring-mvc-static-resources)
 * [How to use webjars in our project](https://www.baeldung.com/maven-webjars)
 * [Weird comment indentation in intellij](https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes)
+* [Resource folder stays in src/main and the other resources in webapp should be named to lib](https://stackoverflow.com/questions/31051494/how-to-link-a-web-resource-file-from-main-resources-in-jsp)
 
 ***
 
