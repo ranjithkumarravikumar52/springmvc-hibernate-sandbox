@@ -159,7 +159,10 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
-				.anyRequest().authenticated()
+				// .anyRequest().authenticated()
+				.antMatchers("/").hasRole("EMPLOYEE") //any employee can access the home page -> our whole app is restricted now to only employees
+				.antMatchers("/leaders/**").hasRole("MANAGER") //any employee can access the home page
+				.antMatchers("/systems/**").hasRole("ADMIN") //any employee can access the home page
 				.and()
 				.formLogin()
 				.loginPage("/showMyLoginPage")
@@ -167,6 +170,7 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 				.permitAll()
 				.and()
 				.logout().permitAll();
+
 
 	}
 }
