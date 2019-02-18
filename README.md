@@ -117,7 +117,13 @@
     * Include logout functionality in the above method and pass it /logout controller (default given by spring security)
 
 ***
-    
+### UserID and roles
+* How to display user id and roles?
+* Download spring security taglibs
+* use spring:authentication principal.username for name
+* use spring:authentication principal.authorities for roles
+
+***
 ## Spring configuration guide
 * [Use these files](https://github.com/ranjithkumarravikumar52/springmvc-starter-files) to jump start the configuration
 * The above files contain pom.xml which has overridden default maven plugins which avoids the problem of ClassNotFoundException for mysql connector
