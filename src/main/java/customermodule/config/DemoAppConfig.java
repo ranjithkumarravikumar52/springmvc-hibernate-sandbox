@@ -63,8 +63,8 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 		}
 
 		// for sanity's sake, let's log url and user ... just to make sure we are reading the data
-		logger.info("jdbc.url=" + environment.getProperty("jdbc.url"));
-		logger.info("jdbc.user=" + environment.getProperty("jdbc.user"));
+		logger.info(">>>>> jdbc.url = " + environment.getProperty("jdbc.url"));
+		logger.info(">>>>> jdbc.user = " + environment.getProperty("jdbc.user"));
 
 		// set database connection props
 		myDataSource.setJdbcUrl(environment.getProperty("jdbc.url"));
@@ -80,50 +80,38 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 		return myDataSource;
 	}
 
+	// set hibernate properties
 	private Properties getHibernateProperties() {
-
-		// set hibernate properties
 		Properties props = new Properties();
-
 		props.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
 		props.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-
 		return props;
 	}
 
 	// need a helper method, read environment property and convert to int
 	private int getIntProperty(String propName) {
-
 		String propVal = environment.getProperty(propName);
-
-		// now convert to int
-		int intPropVal = Integer.parseInt(propVal);
-
+		int intPropVal = Integer.parseInt(propVal);// now convert to int
 		return intPropVal;
 	}
 
+	// create session factory
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
-
-		// create session factorys
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-
 		// set the properties
 		sessionFactory.setDataSource(myDataSource());
 		sessionFactory.setPackagesToScan(environment.getProperty("hibernate.packagesToScan"));
 		sessionFactory.setHibernateProperties(getHibernateProperties());
-
 		return sessionFactory;
 	}
 
 	@Bean
 	@Autowired
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-
 		// setup transaction manager based on session factory
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
-
 		return txManager;
 	}
 
@@ -142,12 +130,15 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//add our users for in memory authentication
+		/*//add our users for in memory authentication
 		User.UserBuilder user = User.withDefaultPasswordEncoder();
 		auth.inMemoryAuthentication()
 				.withUser(user.username("john").password("abc").roles("EMPLOYEE"))
 				.withUser(user.username("mary").password("abc").roles("EMPLOYEE", "MANAGER"))
-				.withUser(user.username("susan").password("abc").roles("EMPLOYEE", "ADMIN"));
+				.withUser(user.username("susan").password("abc").roles("EMPLOYEE", "ADMIN"));*/
+
+		//using jdbc authentication instead of in-memory authentication
+		auth.jdbcAuthentication().dataSource(myDataSource());
 	}
 
 	/**
