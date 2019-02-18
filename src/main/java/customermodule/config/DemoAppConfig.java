@@ -124,8 +124,8 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
-				.addResourceHandler("/resources/**")
-				.addResourceLocations("/resources/");
+				.addResourceHandler("/lib/**")
+				.addResourceLocations("/lib/");
 	}
 
 	/**

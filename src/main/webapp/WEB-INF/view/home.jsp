@@ -8,8 +8,6 @@
     <body>
         <a href="/TestJDBCServlet">Test DB Connection</a><br>
         <a href="/customer/list"> list customers</a><br>
-        <a href="/resources/css/add-customer-style.css">add-customer-style.css</a><br>
-        <a href="/resources/css/style.css">style.css</a><br>
         <a href="/showMyLoginPage">Custom Login Page Sign-in</a><br>
         <p>Last updated: ${currentTime}</p><br>
 
