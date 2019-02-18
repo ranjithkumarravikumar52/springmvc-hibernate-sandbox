@@ -32,11 +32,11 @@ import java.util.logging.Logger;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan("customermodule")
-@PropertySource({"classpath:persistence-mysql.properties"})
+@PropertySource({"classpath:persistence-mysql.properties"}) // will read the props file during maven build, copied to classpath
 public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
 	@Autowired
-	private Environment environment;
+	private Environment environment; // will hold data read from properties file
 
 	private Logger logger = Logger.getLogger(getClass().getName());
 
@@ -52,12 +52,12 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 	@Bean
 	public DataSource myDataSource() {
 
-		// create connection pool
+		// create connection pool from c3p0 framework
 		ComboPooledDataSource myDataSource = new ComboPooledDataSource();
 
 		// set the jdbc driver
 		try {
-			myDataSource.setDriverClass("com.mysql.jdbc.Driver");
+			myDataSource.setDriverClass(environment.getProperty("jdbc.driver"));
 		} catch (PropertyVetoException exc) {
 			throw new RuntimeException(exc);
 		}
