@@ -38,6 +38,9 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 	@Autowired
 	private Environment environment; // will hold data read from properties file
 
+	@Autowired
+	private DataSource myDataSource;
+
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	// define a bean for ViewResolver
@@ -138,7 +141,7 @@ public class DemoAppConfig extends WebSecurityConfigurerAdapter implements WebMv
 				.withUser(user.username("susan").password("abc").roles("EMPLOYEE", "ADMIN"));*/
 
 		//using jdbc authentication instead of in-memory authentication
-		auth.jdbcAuthentication().dataSource(myDataSource());
+		auth.jdbcAuthentication().dataSource(myDataSource);
 	}
 
 	/**
